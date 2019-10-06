@@ -1,28 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e6d0956-cc5e-44da-bb15-2d84373c4e44" name="Default Changelist" comment="" />
+    <list default="true" id="8e6d0956-cc5e-44da-bb15-2d84373c4e44" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/LeftWins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/RightWins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/TotalGamesPLayed" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/leftAlternate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rightAlternate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ModeRetro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Software Design Patterns/StandOff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/score.dat" beforeDir="false" afterPath="$PROJECT_DIR$/score.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StandOff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StandOff.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Software Design Patterns" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Rf8QYoLg39ToS4kGjU6W5xRzVX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/StandOff" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jack Teahan\IdeaProjects\Software Design Patterns\images" />
       <recent name="C:\Users\Jack Teahan\IdeaProjects\Software Design Patterns" />
     </key>
   </component>
@@ -71,11 +108,41 @@
       <option name="presentableId" value="Default" />
       <updated>1570046774104</updated>
       <workItem from="1570046775702" duration="1460000" />
-      <workItem from="1570097263099" duration="4267000" />
+      <workItem from="1570097263099" duration="21181000" />
+      <workItem from="1570213287044" duration="16908000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>759</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

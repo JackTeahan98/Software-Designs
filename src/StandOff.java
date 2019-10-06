@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -12,7 +15,10 @@ public class StandOff{
     public static void main(String[] args) throws IOException {
 
 
-        int GamesPlayed = 0, RedWins = 0, BlueWins = 0;
+        Player leftPLayer = new Player();
+        leftPLayer.setyPosition(1500);
+
+        int GamesPlayed, RedWins, BlueWins;
 
         JPanel panel = new JPanel();  //Creating the JPanel
         JFrame frame = new JFrame();  //Creating the JFrame
@@ -154,12 +160,47 @@ public class StandOff{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JOptionPane.showMessageDialog(null, "Games Played: " + GamesPlayed + "\n\nRed has " + RedWins + " wins...\nBlue has " + BlueWins + " wins...");
+                JOptionPane.showMessageDialog(null, "Games Played: " + getData("data/TotalGamesPLayed")+ "\n\nRed has " + getData("data/RightWins") + " wins...\nBlue has " + getData("data/LeftWins") + " wins...");
 
 
             }
         });
 
+
     }
+    public static int getData(String fileName)
+    {
+        String paragraph="";
+        String line = null;
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        while(true)
+        {
+            try {
+                if (!((line = bufferedReader.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(line);
+            paragraph+=line;
+        }
+
+        try {
+            bufferedReader.close();
+        } catch (IOException e) {
+
+        }
+        int paragphAsInt=Integer.parseInt(paragraph);
+        return paragphAsInt;
+
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Player extends JPanel{
 
@@ -8,13 +9,25 @@ public class Player extends JPanel{
     private int xPosition;
     private int yPosition;
     private BufferedImage player;
+    private PlayerMode playerMode;
+    private int lives;
 
+
+    public void setPlayerMode(PlayerMode playerMode){this.playerMode = playerMode;}
+    public String configureMode(Player player) throws IOException {return playerMode.configureMode(player);}
 
     //Getters and Setters - Name
     public String getName()
     {return name;}
     public void setName(String name)
     {this.name = name;}
+
+
+
+    public int getLives()
+    {return lives;}
+    public void setLives(int lives)
+    {this.lives = lives;}
 
 
     //Getters and Setters - X Position
@@ -39,25 +52,20 @@ public class Player extends JPanel{
     {this.player = player;}
 
 
-
-    //No Argument Constructor (Was mainly used for testing)
     public Player()
     {
-        this("Unknown",0,0,null);
+        this("Unknown",0,0,null,0);
     }
 
 
-    // 4 Argument Constructor
-    public Player(String name, int xPosition, int yPosition, BufferedImage player) {
+    public Player(String name, int xPosition, int yPosition, BufferedImage player, int lives) {
         setName(name);
         setxPosition(xPosition);
         setyPosition(yPosition);
         setImage(player);
-    }
+        setLives((lives));}
 
 
-    // Graphics method, Used to draw the Player Objects Image
-    // Collborated with Petrit Krasniqi on tips in how to use it
     public void drawPlayer(Graphics g){
         ImageIcon img = new ImageIcon(player);
         g.drawImage(img.getImage(),getxPosition(),getyPosition(),null);

@@ -1,13 +1,3 @@
-/**GooEee.java
- *
- *
- * Author: Jack Teahan
- *
- *
- **/
-
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -18,27 +8,31 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
 public class GUI extends JPanel implements ActionListener, KeyListener, Runnable{
 
 
-    int GamesPlayed=0,RedWins=0,BlueWins=0;
-
+    int GamesPlayed;
+    int RedWins,BlueWins;
+    private JComponent component;
+    private Timer timer;
+    private Map<String, Point> pressedKeys = new HashMap<String, Point>();
 
 
     /**player movement speeds on both axi**/
-    int XjumpDistance = 75;
-    int YjumpDistance = 75;
+    int XjumpDistance = 85;
+    int YjumpDistance = 85;
 
     /**ints for both players, that show the X and Y axi for the bullets**/
     int bulletX, bulletY;
     int bulletX2, bulletY2;
 
     /**Ints for storing how many lives left for the players**/
-    int BLUElivesRemaining = 5;
-    int REDlivesRemaining = 5;
+
 
 
     /**booleans for both players, that show if the bullet s shot, and ready to shoot again**/
@@ -63,9 +57,18 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
     private JPanel winPanel = new JPanel();
 
 
+
+
     /**Creates 2 Players from the player class**/
-    public Player leftPlayer = new Player("Jack", 160, 350,ImageIO.read(new File("images/leftPlayer.png")));
-    public Player rightPlayer = new Player("Bob", 1450, 350,ImageIO.read(new File("images/rightPlayer.png")));
+    public Player leftPlayer = new Player("leftPlayer", 160, 350,ImageIO.read(new File("images/leftPlayer.png")),5);
+    public Player rightPlayer = new Player("rightPlayer", 1450, 350,ImageIO.read(new File("images/rightPlayer.png")),5);
+
+    int BLUElivesRemaining;
+    int REDlivesRemaining;
+
+
+
+
 
     /**Some the images used**/
     /** https://stackoverflow.com/questions/13011705/how-to-add-an-imageicon-to-a-jframe**/
@@ -80,6 +83,8 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
 
     /**The constructor and GUI of the game**/
     public GUI() throws IOException {
+        GamesPlayed=getData("data/TotalGamesPLayed");
+        System.out.println(GamesPlayed);
         frame.setSize(1920,1200);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +96,22 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
         gameOn = true;
 
 
-        GamesPlayed ++;
+        saveData("data/TotalGamesPLayed", GamesPlayed++);
+
+
+        leftPlayer.setPlayerMode(new ModeInfiniteHealth());
+        String message=leftPlayer.configureMode(leftPlayer).toString();
+        JOptionPane.showMessageDialog(null, message, "Mode", JOptionPane.INFORMATION_MESSAGE);
+
+        String messageRetroR;
+        leftPlayer.setPlayerMode(new ModeRetro());
+        messageRetroR=leftPlayer.configureMode(leftPlayer).toString();
+        JOptionPane.showMessageDialog(null, messageRetroR, "Mode", JOptionPane.INFORMATION_MESSAGE);
+
+
+
+        BLUElivesRemaining= leftPlayer.getLives();
+        REDlivesRemaining = rightPlayer.getLives();
 
     }
 
@@ -101,6 +121,10 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
     /**Graphics (ABSTRACT) method called paint, which paints all the images and instances onto the screen**/
     public void paint(Graphics g)
     {
+
+
+
+
         /**Draws the background image**/
         g.drawImage(background,0,0,null);
 
@@ -151,6 +175,10 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
 
 
     }
+
+
+
+
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -270,15 +298,25 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
 
 
 
-        /**Attempted to make the bullet only able to fire once, eg, no spamming it...attempted and failed**/
-        else if(e.getKeyCode() == KeyEvent.VK_P)
+        /**Attempted to make the bullet only able to fire once, eg, no spamming it...attempted and failed*/
+         if(e.getKeyCode() == KeyEvent.VK_P)
         {
-        /*    readyToFire2 = false;
+            readyToFire2 = false;
 
             if(bullet2.x <= 10)
             {
                 readyToFire2 = true;
-            } */
+            }
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_T)
+        {
+            readyToFire = false;
+
+            if(bullet.x >= 1920)
+            {
+                readyToFire = true;
+            }
         }
 
     }
@@ -295,7 +333,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
              For the images with the Message Dialog i had help from Jack o Hara who showed me to just put the image as the last part of the JOp**/
 
 
-            RedWins++;
+
             JOptionPane.showMessageDialog(null,"Blue has hit the wall...\n\nRed Player wins!","ERROR 404: DeathByElectrocution.yolo",JOptionPane.PLAIN_MESSAGE,electricBlue);
             frame.setVisible(false);
             redWinScreenGUI();
@@ -308,7 +346,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
         if(rightPlayer.getxPosition() > 1650  || rightPlayer.getxPosition() <= 850  || rightPlayer.getyPosition() < -100 || rightPlayer.getyPosition() >= 800)
         {
 
-            BlueWins++;
+
             JOptionPane.showMessageDialog(null, "Red has hit the wall...\n\nBlue Player wins!","ERROR 404: DeathByElectrocution.yolo", JOptionPane.PLAIN_MESSAGE,electricRed);
             frame.setVisible(false);
             blueWinScreenGUI();
@@ -323,7 +361,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
         /**JB - has the left players bullet hit the right player
          Struggled to get this to work for ages, had help from John Brosnan
          If the bullet is at these boundaries...**/
-        if(bullet2!=null && bullet2.getX() <= leftPlayer.getxPosition() +85 && bullet2.getX() >= 0      &&    bullet2.getY() <= leftPlayer.getyPosition() + 300 && bullet2.getY() >= leftPlayer.getyPosition()) {
+        if(bullet2!=null && bullet2.getX() <= leftPlayer.getxPosition()  && bullet2.getX() >= 0      &&    bullet2.getY() <= leftPlayer.getyPosition() + 300 && bullet2.getY() >= leftPlayer.getyPosition()) {
 
 
 
@@ -339,7 +377,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
             /**if the player has no more lives, then open up a new GUI**/
             if(BLUElivesRemaining == 0)
             {
-                RedWins++;
+
                 frame.setVisible(false);
                 redWinScreenGUI(); }
         }
@@ -348,7 +386,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
 
     public void leftPlayerBulletLand()
     {
-        if(bullet!=null && bullet.getX() >= rightPlayer.getxPosition() -50 && bullet.getX() <= frame.getWidth() && bullet.getY() <= rightPlayer.getyPosition() + 300 && bullet.getY() >= rightPlayer.getyPosition()) {
+        if(bullet!=null && bullet.getX() >= rightPlayer.getxPosition() +300 && bullet.getX() <= frame.getWidth() && bullet.getY() <= rightPlayer.getyPosition() + 300 && bullet.getY() >= rightPlayer.getyPosition()) {
 
 
 
@@ -363,7 +401,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
             /**if the player has no more lives, then open up a new GUI**/
             if(REDlivesRemaining == 0)
             {
-                BlueWins++;
+
 
 
                 try {
@@ -412,8 +450,8 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
                 /**run these methods**/
                 shoot();
                 shoot2();
-
                 paint(g);
+
 
                 /**time between each thread**/
                 Thread.sleep(10);
@@ -425,6 +463,10 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
         }
         System.out.println("Game now over!");
     }
+
+
+
+
 
 
 
@@ -594,7 +636,7 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JOptionPane.showMessageDialog(null,"Games Played: "+GamesPlayed+ "\n\nRed has "+RedWins+ " wins...\nBlue has "+BlueWins+ " wins...");
+                JOptionPane.showMessageDialog(null, "Games Played: " + getData("data/TotalGamesPLayed")+ "\n\nRed has " + getData("data/RightWins") + " wins...\nBlue has " + getData("data/LeftWins") + " wins...");
 
 
 
@@ -608,6 +650,9 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
     /**A simple red and blue winning GUIs below that displays who wins**/
     public void redWinScreenGUI()
     {
+        RedWins=getData("data/RightWins");
+        saveData("data/RightWins", RedWins++);
+
         JLabel picture = new JLabel (new ImageIcon ("images//redWinbackground.png"));
         picture.setSize (1920,1200);
         picture.setLocation (0,0);
@@ -655,6 +700,8 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
 
     public void blueWinScreenGUI()
     {
+        BlueWins=getData("data/LeftWins");
+        saveData("data/LeftWins", BlueWins++);
         JLabel picture = new JLabel (new ImageIcon ("images//blueWinbackground.png"));
         picture.setSize (1920,1200);
         picture.setLocation (0,0);
@@ -705,6 +752,65 @@ public class GUI extends JPanel implements ActionListener, KeyListener, Runnable
         os.writeObject(GamesPlayed);
         os.close();
     }
+    
+    public void saveData(String fileName, int value){
 
+        int value2 = value+1;
+        String valueAsString=Integer.toString(value2);
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer.write(valueAsString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    public int getData(String fileName) {
+        String paragraph="";
+        String line = null;
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while(true)
+            {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(line);
+                paragraph+=line;
+            }
+
+        try {
+            bufferedReader.close();
+        } catch (IOException e) {
+
+        }
+        int paragphAsInt=Integer.parseInt(paragraph);
+        return paragphAsInt;
+
+
+    }
 
 }
